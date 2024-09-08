@@ -13,9 +13,11 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Drink water" required />
 
-                        <p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Well
-                                done!</span>
-                            Some success message.</p>
+                        @if(todoForm.get('title')?.invalid && todoForm.get('title')?.touched)
+                        {
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error: </span>
+                            Title is required.</p>
+                        }
                     </div>
 
                     <div>
@@ -25,10 +27,11 @@
                             class="block p-2.5 h-1/3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Your description here!"></textarea>
 
-
-                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh,
-                                snapp!</span> Some
-                            error message.</p>
+                        @if(todoForm.get('description')?.invalid && todoForm.get('description')?.touched)
+                        {
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error: </span>
+                            Description is required.</p>
+                        }
                     </div>
 
                     <div>
@@ -45,6 +48,13 @@
                             <input id="date" formControlName="date" type="date"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Select date">
+
+                            @if(todoForm.get('date')?.invalid && todoForm.get('date')?.touched)
+                            {
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error:
+                                </span>
+                                Date is required.</p>
+                            }
                         </div>
                     </div>
 
@@ -66,6 +76,13 @@
                                 <input type="time" formControlName="time" id="time"
                                     class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     min="09:00" max="18:00" value="00:00" required />
+
+                                @if(todoForm.get('time')?.invalid && todoForm.get('time')?.touched)
+                                {
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error:
+                                    </span>
+                                    Time is required.</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -140,7 +157,7 @@
                     }
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline"
+                    <a class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
                         (click)="toggleStatus($index)"><svg class="w-[24px] h-[24px] text-green-500 dark:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -152,7 +169,7 @@
                 </td>
                 <td class="px-6 py-4 text-right">
                     <div class="flex items-center">
-                        <a href="#" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline"
+                        <a class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
                             (click)="editTodo($index)"><svg class="w-6 h-6 text-blue-600 dark:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
@@ -163,7 +180,7 @@
                         </a>
 
 
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
                             (click)="removeTodo($index)"><svg class="w-6 h-6 text-red-600 dark:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">

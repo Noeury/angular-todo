@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-todo-list',
@@ -50,16 +51,20 @@ export class ListComponent implements OnInit {
 
       if (this.isEditing && this.editIndex !== null) {
         this.TodoService.updateTodo(this.editIndex, updatedTodo);
+        toast.success('Todo has been updated');
+
         this.isEditing = false;
         this.editIndex = null;
       } else {
         this.TodoService.create(updatedTodo);
+        toast.success('Todo has been created');
       }
 
       this.loadTodoList();
 
       this.todoForm.reset({ id: Date.now(), status: false });
     } else {
+      toast.error('Please fill in all required fields');
       alert('Please fill in all required fields.');
     }
   }
@@ -91,12 +96,14 @@ export class ListComponent implements OnInit {
   removeTodo(index: number): void {
     this.TodoService.removeTodo(index);
     this.loadTodoList();
+    toast.success('Todo has been deleted');
   }
 
   toggleStatus(index: number): void {
     const todo = this.todos[index];
     this.TodoService.updateTodoStatus(index, !todo.status);
     this.loadTodoList();
+    toast.success('Todo status has been updated');
   }
 
   OnSubmit() {
